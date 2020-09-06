@@ -5,6 +5,13 @@ import months from "../Static/months";
 // ===== Styles =====
 import { withStyles } from "@material-ui/core";
 import styles from "../styles/CovidApp";
+import { formatDistance } from "date-fns";
+import {
+	faBell,
+	faBellSlash,
+	faSyncAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class CovidApp extends React.Component {
 	constructor(props) {
@@ -18,15 +25,17 @@ class CovidApp extends React.Component {
 		};
 
 		this.fetchData = this.fetchData.bind(this);
+		this.formatData = this.formatData.bind(this);
 		this.findStateId = this.findStateId.bind(this);
-		this.getMapData = this.getMapData(this);
+		this.getMapData = this.getMapData.bind(this); //handleformat
+		this.handleNotification = this.handleNotification.bind(this);
 	}
 
 	componentDidMount() {
 		this.fetchData();
 	}
 
-	fetchData() {
+	async fetchData() {
 		const countryData = axios.get("https://api.covid19india.org/data.json");
 		const districtLevel = axios.get(
 			"https://api.covid19india.org/v2/state_district_wise.json"
@@ -85,12 +94,14 @@ class CovidApp extends React.Component {
 
 	getMapData() {
 		const newData = this.formatData(this.state.data);
-
 		this.setState({
 			mapData: newData,
 		});
+	}
 
-		//this.state.mapData = newData;
+	//toggle
+	handleNotification() {
+		this.setState({ expanded: !this.state.expanded });
 	}
 
 	formatDate(date) {
@@ -99,17 +110,71 @@ class CovidApp extends React.Component {
 			const month = date.slice(3, 5);
 			const time = date.slice(11);
 			return `${day} ${months[month]}, ${time.slice(0, 5)} IST`;
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (e) {}
 	}
 
 	render() {
+		const { classes } = this.props; //material UI
 		const { mapData, data, districtLevel, expanded, updates } = this.state;
 
+		let showUpdates;
+
+		try {
+			//last 5 latest updates
+
+			showUpdates = updates
+				.slice(-5)
+				.reverse()
+				.map(({ update, timestamp }, i) => {
+					update = update.replace("\n", "<br/>");
+					return (
+						<div className={classes.updateBox} key={i}>
+							<h5 className={classes.updateHeading}>
+								{`${formatDistance(
+									new Date(timestamp * 1000),
+									new Date()
+								)} ago`}
+							</h5>
+							<h4
+								className={classes.updateText}
+								dangerouslySetInnerHTML={
+									//to inject the updates directly to the dom and notifying React
+									//we used dangerouslySetInnerHTML
+									{
+										__html: update,
+									}
+								}></h4>
+						</div>
+					);
+				});
+		} catch (e) {}
+
 		return (
-			<div className={this.props.classes.header}>
-				<h1>CovidApp</h1>
+			<div>
+				<div className={classes.header}>
+					<h1 className={classes.heading}>
+						<span>Covid-19</span>
+					</h1>
+					India Today
+				</div>
+				<div className={classes.updates}>
+					<div className={classes.notification}>
+						{expanded ? (
+							<FontAwesomeIcon
+								icon={faBellSlash}
+								onClick={this.handleNotification}
+							/>
+						) : (
+							<div className={classes.notificationBell}>
+								<FontAwesomeIcon
+									icon={faBell}
+									onClick={this.handleNotification}
+								/>
+							</div>
+						)}
+					</div>
+					{expanded && <div className={classes.update}>{showUpdates}</div>}
+				</div>
 			</div>
 		);
 	}
