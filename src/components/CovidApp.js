@@ -114,7 +114,7 @@ class CovidApp extends React.Component {
 	}
 
 	render() {
-		const { classes } = this.props; //material UI
+		const { classes, setDarkMode, isDarkMode } = this.props; //material UI
 		const { mapData, data, districtLevel, expanded, updates } = this.state;
 
 		let showUpdates;
@@ -154,8 +154,18 @@ class CovidApp extends React.Component {
 				<div className={classes.header}>
 					<h1 className={classes.heading}>
 						<span>Covid-19</span>
+						India Today
 					</h1>
-					India Today
+				</div>
+				<div>
+					<FontAwesomeIcon
+						icon={faSyncAlt}
+						className={classes.button}
+						onClick={this.fetchData}
+					/>
+				</div>
+				<div className={classes.lastUpdatedTime}>
+					Last Updated: {this.formatDate(this.state.todayData.lastupdatedtime)}
 				</div>
 				<div className={classes.updates}>
 					<div className={classes.notification}>
@@ -174,6 +184,16 @@ class CovidApp extends React.Component {
 						)}
 					</div>
 					{expanded && <div className={classes.update}>{showUpdates}</div>}
+				</div>
+				<div className='darkModeButton'>
+					<label className='switch'>
+						<input
+							type='checkbox'
+							onChange={setDarkMode}
+							checked={isDarkMode}
+						/>
+						<span className='slider round'></span>
+					</label>
 				</div>
 			</div>
 		);
