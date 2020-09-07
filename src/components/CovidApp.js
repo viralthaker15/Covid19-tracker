@@ -1,10 +1,14 @@
+// ===== Components =====
 import React from "react";
 import axios from "axios";
 import stateCodes from "../Static/stateCodes";
 import months from "../Static/months";
+import Overview from "./Overview";
+import MapArea from "./MapArea";
 // ===== Styles =====
 import { withStyles } from "@material-ui/core";
 import styles from "../styles/CovidApp";
+import "../styles/_DarkModeButton.css";
 import { formatDistance } from "date-fns";
 import {
 	faBell,
@@ -156,44 +160,59 @@ class CovidApp extends React.Component {
 						<span>Covid-19</span>
 						India Today
 					</h1>
-				</div>
-				<div>
-					<FontAwesomeIcon
-						icon={faSyncAlt}
-						className={classes.button}
-						onClick={this.fetchData}
-					/>
-				</div>
-				<div className={classes.lastUpdatedTime}>
-					Last Updated: {this.formatDate(this.state.todayData.lastupdatedtime)}
-				</div>
-				<div className={classes.updates}>
-					<div className={classes.notification}>
-						{expanded ? (
-							<FontAwesomeIcon
-								icon={faBellSlash}
-								onClick={this.handleNotification}
-							/>
-						) : (
-							<div className={classes.notificationBell}>
+					<div>
+						<FontAwesomeIcon
+							icon={faSyncAlt}
+							className={classes.button}
+							onClick={this.fetchData}
+						/>
+					</div>
+					<div className={classes.lastUpdatedTime}>
+						Last Updated:{" "}
+						{this.formatDate(this.state.todayData.lastupdatedtime)}
+					</div>
+					<div className={classes.updates}>
+						<div className={classes.notification}>
+							{expanded ? (
 								<FontAwesomeIcon
-									icon={faBell}
+									icon={faBellSlash}
 									onClick={this.handleNotification}
 								/>
-							</div>
-						)}
+							) : (
+								<div className={classes.notificationBell}>
+									<FontAwesomeIcon
+										icon={faBell}
+										onClick={this.handleNotification}
+									/>
+								</div>
+							)}
+						</div>
+						{expanded && <div className={classes.update}>{showUpdates}</div>}
 					</div>
-					{expanded && <div className={classes.update}>{showUpdates}</div>}
+					<div className='darkModeButton'>
+						<label className='switch'>
+							<input
+								type='checkbox'
+								onChange={setDarkMode}
+								checked={isDarkMode}
+							/>
+							<span className='slider round'></span>
+						</label>
+					</div>
 				</div>
-				<div className='darkModeButton'>
-					<label className='switch'>
-						<input
-							type='checkbox'
-							onChange={setDarkMode}
-							checked={isDarkMode}
-						/>
-						<span className='slider round'></span>
-					</label>
+				<div>
+					<Overview
+						isDarkMode={isDarkMode}
+						data={this.state.todayData}
+						loadingStatus={this.loadingStatus}
+					/>
+				</div>
+				<div className={classes.content}>
+					<div className={classes.contentArea}>
+						<div className={classes.mapArea}>
+							<MapArea data={data} mapData={mapData} isDarkMode={isDarkMode} />
+						</div>
+					</div>
 				</div>
 			</div>
 		);
