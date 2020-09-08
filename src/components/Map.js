@@ -88,7 +88,7 @@ class Map extends React.Component {
 				<ComposableMap
 					projectionConfig={PROJECTION_CONFIG}
 					projection='geoMercator'
-					width={400} //600
+					width={250} //600
 					height={220}
 					data-tip=''>
 					<Geographies geography={INDIA_TOPO_JSON}>

@@ -2,7 +2,7 @@ import sizes from "../Static/sizes";
 
 export default {
 	mainContainer: {
-		backgroundColor: "rgba(129, 124, 155, 0.05)",
+		backgroundColor: "rgba(129, 124, 155, 0.08)",
 		padding: "7rem 3rem",
 		textAlign: "center",
 

@@ -162,4 +162,75 @@ export default {
 			display: "none",
 		},
 	},
+
+	// content => map section
+	content: {
+		borderRadius: "2rem",
+		marginTop: "3rem",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+
+		[sizes.down("md")]: {
+			marginTop: "2.5rem",
+			padding: "1.5rem",
+		},
+		[sizes.down("xs")]: {
+			marginTop: "2.5rem",
+			padding: "0",
+		},
+	},
+
+	contentArea: {
+		display: "flex",
+	},
+
+	mapArea: {
+		flex: "1",
+	},
+
+	//charts
+	chartArea: {
+		borderRadius: "2rem",
+		minWidth: "50%",
+		display: "flex",
+		justifyContent: "center",
+		flexDirection: "column",
+	},
+
+	chartRes: {
+		// margin: "0 auto",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	},
+
+	tinyChartArea: {
+		display: "flex",
+		flexWrap: "wrap",
+		padding: "2rem 2rem",
+		justifyContent: "space-evenly",
+		alignItems: "center",
+		marginTop: "5rem",
+	},
+
+	tinyChart: {
+		width: "30%",
+		margin: "2.5rem",
+		"& h3": {
+			textTransform: "capitalize",
+			fontWeight: 500,
+
+			textAlign: "center",
+		},
+		[sizes.down("lg")]: {
+			width: "auto",
+		},
+	},
+
+	tinych: {
+		borderRadius: ".5rem",
+		marginBottom: ".5rem",
+		padding: "1rem",
+	},
 };

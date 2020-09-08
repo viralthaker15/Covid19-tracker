@@ -5,7 +5,10 @@ import stateCodes from "../Static/stateCodes";
 import months from "../Static/months";
 import Overview from "./Overview";
 import MapArea from "./MapArea";
+import Charts from "./Charts";
+import Barchart from "./Barchart";
 // ===== Styles =====
+import colors from "../Static/colors";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/CovidApp";
 import "../styles/_DarkModeButton.css";
@@ -78,7 +81,7 @@ class CovidApp extends React.Component {
 		);
 	}
 
-	//formatting data
+	//formatting data -> restructuring data for HeatMap
 	formatData(data) {
 		const formatData = data.map(singleData => {
 			return {
@@ -154,13 +157,13 @@ class CovidApp extends React.Component {
 		} catch (e) {}
 
 		return (
-			<div>
+			<>
 				<div className={classes.header}>
 					<h1 className={classes.heading}>
 						<span>Covid-19</span>
 						India Today
 					</h1>
-					<div>
+					<div className={classes.btnBox}>
 						<FontAwesomeIcon
 							icon={faSyncAlt}
 							className={classes.button}
@@ -214,7 +217,67 @@ class CovidApp extends React.Component {
 						</div>
 					</div>
 				</div>
-			</div>
+
+				<div className={classes.chartArea}>
+					<div className={classes.chartRes}>
+						<Charts data={this.state.casesTimeline} />
+					</div>
+					<div className={classes.tinyChartArea}>
+						<div className={classes.tinyChart}>
+							<div
+								className={classes.tinych}
+								style={{ background: "rgba(249, 52, 94,.1)" }}>
+								<h3 style={{ color: colors.red }}>confirmed</h3>
+								<Barchart
+									data={this.state.casesTimeline}
+									isLoading={this.state.isLoading}
+									dataKey='totalconfirmed'
+									stroke={colors.red}
+								/>
+							</div>
+						</div>
+						<div className={classes.tinyChart}>
+							<div
+								className={classes.tinych}
+								style={{ background: "rgba(250, 100, 0,.1)" }}>
+								<h3 style={{ color: colors.orange }}>active</h3>
+								<Barchart
+									data={this.state.casesTimeline}
+									isLoading={this.state.isLoading}
+									dataKey='totalactive'
+									stroke={colors.orange}
+								/>
+							</div>
+						</div>
+						<div className={classes.tinyChart}>
+							<div
+								className={classes.tinych}
+								style={{ background: "rgba(28, 177, 66,.1)" }}>
+								<h3 style={{ color: colors.green }}>Recovered</h3>
+								<Barchart
+									data={this.state.casesTimeline}
+									isLoading={this.state.isLoading}
+									dataKey='totalrecovered'
+									stroke={colors.green}
+								/>
+							</div>
+						</div>
+						<div className={classes.tinyChart}>
+							<div
+								className={classes.tinych}
+								style={{ background: "rgba(98, 54, 255,.1)" }}>
+								<h3 style={{ color: colors.purple }}>Deaths</h3>
+								<Barchart
+									data={this.state.casesTimeline}
+									isLoading={this.state.isLoading}
+									dataKey='totaldeaths'
+									stroke={colors.purple}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</>
 		);
 	}
 }
