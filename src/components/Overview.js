@@ -1,7 +1,7 @@
 import React from "react";
 import DisplayPanels from "./DisplayPanels";
 import styles from "../styles/Overview";
-import { withStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/styles";
 
 const Overview = props => {
 	const { isDarkMode, classes } = props;

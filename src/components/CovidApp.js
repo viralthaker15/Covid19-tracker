@@ -6,7 +6,7 @@ import months from "../Static/months";
 import Overview from "./Overview";
 import MapArea from "./MapArea";
 // ===== Styles =====
-import { withStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/styles";
 import styles from "../styles/CovidApp";
 import "../styles/_DarkModeButton.css";
 import { formatDistance } from "date-fns";
@@ -82,9 +82,9 @@ class CovidApp extends React.Component {
 	formatData(data) {
 		const formatData = data.map(singleData => {
 			return {
-				id: this.findStateId(singleData.state), // state codes gujarat -> GJ
+				id: this.findStateId(singleData.state), // state codes gujarat -> GJ which is used in geographies
 				state: singleData.state.replace(" and ", " & "),
-				value: singleData.confirmed,
+				value: singleData.confirmed, //this data will be used in geopgraphy (onMouseEnter -> tooltip)
 			};
 		});
 
