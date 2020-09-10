@@ -31,7 +31,7 @@ const defaultOptions = {
 	autoplay: true,
 	animationData: animationData.default,
 	rendererSettings: {
-		preserveAspectRatio: "XMidYMid slice",
+		preserveAspectRatio: "xMidYMid slice",
 	},
 };
 

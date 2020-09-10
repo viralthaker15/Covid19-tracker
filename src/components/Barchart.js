@@ -3,7 +3,7 @@ import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
 
 export default class Barchart extends React.Component {
 	render() {
-		const { data, isLoading, dataKey, stroke } = this.props;
+		const { data, dataKey, stroke } = this.props;
 		let result;
 
 		try {

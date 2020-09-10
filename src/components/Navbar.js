@@ -7,7 +7,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withStyles } from "@material-ui/styles";
-import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/coronalogo.svg";
 import styles from "../styles/Navbar";
