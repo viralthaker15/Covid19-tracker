@@ -25,7 +25,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as animationData from "../assets/lottie-loading.json";
 import Lottie from "react-lottie";
 
-//Animation-loader config
+//Animation-loader config for lottie
 const defaultOptions = {
 	loop: true,
 	autoplay: true,
