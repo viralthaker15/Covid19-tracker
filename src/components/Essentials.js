@@ -7,6 +7,7 @@ import FadeIn from "react-fade-in";
 import styles from "../styles/Essentials";
 import EssentialForm from "./EssentialForm";
 import Placeholder from "./Placeholder";
+import Footer from "./Footer";
 
 class Essentials extends React.Component {
 	constructor(props) {
@@ -131,24 +132,27 @@ class Essentials extends React.Component {
 			return null;
 		});
 		return (
-			<div className={classes.help}>
-				<h1 className={classes.mainHeading}>
-					Search for Essentials and Services
-				</h1>
-				<EssentialForm
-					handleQuery={this.handleQuery}
-					handleLoading={this.handleLoading}
-				/>
-				{this.state.loadingStatus === "loading" && (
-					<div className={classes.container}>
-						<Placeholder />
-						<Placeholder />
-						<Placeholder />
-					</div>
-				)}
-				{this.state.loadingStatus === "completeLoading" && (
-					<div className={classes.container}>{res}</div>
-				)}
+			<div>
+				<div className={classes.help}>
+					<h1 className={classes.mainHeading}>
+						Search for Essentials and Services
+					</h1>
+					<EssentialForm
+						handleQuery={this.handleQuery}
+						handleLoading={this.handleLoading}
+					/>
+					{this.state.loadingStatus === "loading" && (
+						<div className={classes.container}>
+							<Placeholder />
+							<Placeholder />
+							<Placeholder />
+						</div>
+					)}
+					{this.state.loadingStatus === "completeLoading" && (
+						<div className={classes.container}>{res}</div>
+					)}
+				</div>
+				<Footer />
 			</div>
 		);
 	}

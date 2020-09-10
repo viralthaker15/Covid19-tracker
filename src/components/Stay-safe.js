@@ -1,6 +1,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/styles";
 import Cards from "./Cards.js";
+import Footer from "./Footer";
 import calender from "../assets/calender.svg";
 import coronalogo from "../assets/coronalogo.svg";
 import nogreet from "../assets/nogreet.svg";
@@ -23,19 +24,22 @@ const staySafe = props => {
 
 	return (
 		<div>
-			<div className={classes.staySafe}>
-				<h1>Stay Safe</h1>
-				<div className={classes.cardsBox}>
-					{svgIcons.map((svg, i) => (
-						<Cards
-							key={i}
-							src={svg.src}
-							title={svg.title}
-							isDarkMode={isDarkMode}
-						/>
-					))}
+			<div>
+				<div className={classes.staySafe}>
+					<h1>Stay Safe</h1>
+					<div className={classes.cardsBox}>
+						{svgIcons.map((svg, i) => (
+							<Cards
+								key={i}
+								src={svg.src}
+								title={svg.title}
+								isDarkMode={isDarkMode}
+							/>
+						))}
+					</div>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 };

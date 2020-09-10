@@ -70,4 +70,15 @@ export default {
 	issue: {
 		backgroundColor: "#817C9B",
 	},
+
+	linkedin: {
+		backgroundColor: "#0a9ac9",
+	},
+
+	Tagline: {
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		fontWeight: "700",
+	},
 };
