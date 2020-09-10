@@ -1,12 +1,13 @@
 // ===== components =====
 import React from "react";
 import Canvas from "./components/Canvas";
+import Navbar from "./components/Navbar";
 import CovidApp from "./components/CovidApp";
 import Essentials from "./components/Essentials";
 import Staysafe from "./components/Stay-safe";
 import Symptoms from "./components/Symptoms";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import "./App.css";
+import "./styles/_App.css";
 
 class App extends React.Component {
 	constructor(props) {
@@ -29,10 +30,12 @@ class App extends React.Component {
 		const { isDarkMode } = this.state;
 		return (
 			<Canvas isDarkMode={isDarkMode}>
-				<div className='root'>
-					<div className='navBar'></div>
-					<div className='dashBoard'>
-						<BrowserRouter>
+				<BrowserRouter>
+					<div className='root'>
+						<div className='navBar'>
+							<Navbar isDarkMode={isDarkMode} />
+						</div>
+						<div className='dashBoard'>
 							<Switch>
 								<Route
 									exact
@@ -60,9 +63,9 @@ class App extends React.Component {
 									render={() => <Essentials isDarkMode={isDarkMode} />}
 								/>
 							</Switch>
-						</BrowserRouter>
+						</div>
 					</div>
-				</div>
+				</BrowserRouter>
 			</Canvas>
 		);
 	}

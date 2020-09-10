@@ -7,6 +7,8 @@ import Overview from "./Overview";
 import MapArea from "./MapArea";
 import Charts from "./Charts";
 import Barchart from "./Barchart";
+import DisplayTable from "./DisplayTable";
+import Footer from "./Footer";
 // ===== Styles =====
 import colors from "../Static/colors";
 import { withStyles } from "@material-ui/styles";
@@ -19,6 +21,19 @@ import {
 	faSyncAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// ===== lottie =====
+import * as animationData from "../assets/lottie-loading.json";
+import Lottie from "react-lottie";
+
+//Animation-loader config
+const defaultOptions = {
+	loop: true,
+	autoplay: true,
+	animationData: animationData.default,
+	rendererSettings: {
+		preserveAspectRatio: "XMidYMid slice",
+	},
+};
 
 class CovidApp extends React.Component {
 	constructor(props) {
@@ -43,6 +58,7 @@ class CovidApp extends React.Component {
 	}
 
 	async fetchData() {
+		this.setState({ isLoading: !this.state.isLoading });
 		const countryData = axios.get("https://api.covid19india.org/data.json");
 		const districtLevel = axios.get(
 			"https://api.covid19india.org/v2/state_district_wise.json"
@@ -101,6 +117,9 @@ class CovidApp extends React.Component {
 
 	getMapData() {
 		const newData = this.formatData(this.state.data);
+		setTimeout(() => {
+			this.setState({ isLoading: false });
+		}, 2000);
 		this.setState({
 			mapData: newData,
 		});
@@ -122,10 +141,24 @@ class CovidApp extends React.Component {
 
 	render() {
 		const { classes, setDarkMode, isDarkMode } = this.props; //material UI
-		const { mapData, data, districtLevel, expanded, updates } = this.state;
+		const {
+			mapData,
+			data,
+			districtLevel,
+			expanded,
+			updates,
+			isLoading,
+		} = this.state;
+
+		if (isLoading) {
+			return (
+				<div className={classes.loadingIcon}>
+					<Lottie options={defaultOptions} height={600} width={500} />
+				</div>
+			);
+		}
 
 		let showUpdates;
-
 		try {
 			//last 5 latest updates
 
@@ -216,67 +249,77 @@ class CovidApp extends React.Component {
 							<MapArea data={data} mapData={mapData} isDarkMode={isDarkMode} />
 						</div>
 					</div>
-				</div>
-
-				<div className={classes.chartArea}>
-					<div className={classes.chartRes}>
-						<Charts data={this.state.casesTimeline} />
+					<div className={classes.chartArea}>
+						<div className={classes.chartRes}>
+							<Charts data={this.state.casesTimeline} />
+						</div>
+						<div className={classes.tinyChartArea}>
+							<div className={classes.tinyChart}>
+								<div
+									className={classes.tinych}
+									style={{ background: "rgba(249, 52, 94,.1)" }}>
+									<h3 style={{ color: colors.red }}>confirmed</h3>
+									<Barchart
+										data={this.state.casesTimeline}
+										isLoading={this.state.isLoading}
+										dataKey='totalconfirmed'
+										stroke={colors.red}
+									/>
+								</div>
+							</div>
+							<div className={classes.tinyChart}>
+								<div
+									className={classes.tinych}
+									style={{ background: "rgba(250, 100, 0,.1)" }}>
+									<h3 style={{ color: colors.orange }}>active</h3>
+									<Barchart
+										data={this.state.casesTimeline}
+										isLoading={this.state.isLoading}
+										dataKey='totalactive'
+										stroke={colors.orange}
+									/>
+								</div>
+							</div>
+							<div className={classes.tinyChart}>
+								<div
+									className={classes.tinych}
+									style={{ background: "rgba(28, 177, 66,.1)" }}>
+									<h3 style={{ color: colors.green }}>Recovered</h3>
+									<Barchart
+										data={this.state.casesTimeline}
+										isLoading={this.state.isLoading}
+										dataKey='totalrecovered'
+										stroke={colors.green}
+									/>
+								</div>
+							</div>
+							<div className={classes.tinyChart}>
+								<div
+									className={classes.tinych}
+									style={{ background: "rgba(98, 54, 255,.1)" }}>
+									<h3 style={{ color: colors.purple }}>Deaths</h3>
+									<Barchart
+										data={this.state.casesTimeline}
+										isLoading={this.state.isLoading}
+										dataKey='totaldeaths'
+										stroke={colors.purple}
+									/>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div className={classes.tinyChartArea}>
-						<div className={classes.tinyChart}>
-							<div
-								className={classes.tinych}
-								style={{ background: "rgba(249, 52, 94,.1)" }}>
-								<h3 style={{ color: colors.red }}>confirmed</h3>
-								<Barchart
-									data={this.state.casesTimeline}
-									isLoading={this.state.isLoading}
-									dataKey='totalconfirmed'
-									stroke={colors.red}
-								/>
-							</div>
-						</div>
-						<div className={classes.tinyChart}>
-							<div
-								className={classes.tinych}
-								style={{ background: "rgba(250, 100, 0,.1)" }}>
-								<h3 style={{ color: colors.orange }}>active</h3>
-								<Barchart
-									data={this.state.casesTimeline}
-									isLoading={this.state.isLoading}
-									dataKey='totalactive'
-									stroke={colors.orange}
-								/>
-							</div>
-						</div>
-						<div className={classes.tinyChart}>
-							<div
-								className={classes.tinych}
-								style={{ background: "rgba(28, 177, 66,.1)" }}>
-								<h3 style={{ color: colors.green }}>Recovered</h3>
-								<Barchart
-									data={this.state.casesTimeline}
-									isLoading={this.state.isLoading}
-									dataKey='totalrecovered'
-									stroke={colors.green}
-								/>
-							</div>
-						</div>
-						<div className={classes.tinyChart}>
-							<div
-								className={classes.tinych}
-								style={{ background: "rgba(98, 54, 255,.1)" }}>
-								<h3 style={{ color: colors.purple }}>Deaths</h3>
-								<Barchart
-									data={this.state.casesTimeline}
-									isLoading={this.state.isLoading}
-									dataKey='totaldeaths'
-									stroke={colors.purple}
-								/>
-							</div>
-						</div>
+					<div className={classes.tableContainer}>
+						<h2 className={classes.tableHeading}>
+							State/UT Wise Data (Sortable){" "}
+						</h2>
+						<DisplayTable
+							tableData={data}
+							districtLevel={districtLevel}
+							isDarkMode={isDarkMode}
+						/>
 					</div>
 				</div>
+				<Footer />
 			</>
 		);
 	}

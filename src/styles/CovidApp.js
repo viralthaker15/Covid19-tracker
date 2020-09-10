@@ -233,4 +233,40 @@ export default {
 		marginBottom: ".5rem",
 		padding: "1rem",
 	},
+
+	//Table area
+	tableContainer: {
+		padding: "2rem",
+		margin: "5rem 0",
+
+		[sizes.down("md")]: {
+			margin: "3.5rem 0",
+			padding: "1.5rem",
+		},
+
+		[sizes.down("sm")]: {
+			margin: "1.2rem 0",
+			padding: "0",
+		},
+	},
+
+	tableHeading: {
+		textAlign: "center",
+		marginTop: "2.5rem",
+		fontSize: "3rem",
+
+		[sizes.down("lg")]: {
+			fontSize: "2.5rem",
+			marginTop: "1.5rem",
+		},
+
+		[sizes.down("md")]: {
+			marginTop: ".5rem",
+		},
+
+		[sizes.down("sm")]: {
+			marginTop: ".2rem",
+			fontSize: "1.3rem",
+		},
+	},
 };
