@@ -259,7 +259,7 @@ export default {
 		},
 
 		[sizes.down("sm")]: {
-			margin: "1.2rem 0",
+			marginRight: "1.2rem",
 			padding: "0",
 		},
 	},
