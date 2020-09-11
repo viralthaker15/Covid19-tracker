@@ -22,7 +22,8 @@ class Charts extends React.Component {
 				let dateData = {};
 				for (let [key, value] of Object.entries(singleData)) {
 					if (key === "date") dateData[key] = value;
-					if (key === "totaldeceased") dateData["totaldeaths"] = Number(value);
+					else if (key === "totaldeceased")
+						dateData["totaldeaths"] = Number(value);
 					else dateData[key] = Number(value);
 				}
 				return {
