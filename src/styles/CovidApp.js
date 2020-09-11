@@ -259,8 +259,7 @@ export default {
 		},
 
 		[sizes.down("sm")]: {
-			marginRight: "1.2rem",
-			padding: "0",
+			overflow: "auto",
 		},
 	},
 
