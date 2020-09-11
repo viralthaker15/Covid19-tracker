@@ -14,7 +14,7 @@
 
 .dashBoard {
 	flex: 1;
-	padding: 2rem;
+	padding: 0rem;
 	position: relative;
 	overflow: hidden;
 }
