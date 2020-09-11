@@ -2,7 +2,6 @@ import sizes from "../Static/sizes";
 
 export default {
 	charts: {
-		backgroundColor: "rgba(129, 124, 155, 0.08)",
 		width: "50%",
 		height: "35rem",
 		marginTop: "5rem",
@@ -13,8 +12,8 @@ export default {
 			height: "30rem",
 		},
 		[sizes.down("xs")]: {
-			marginTop: "rem",
-			height: "rem",
+			marginTop: "2.5rem",
+			height: "35rem",
 		},
 	},
 

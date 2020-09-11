@@ -196,7 +196,7 @@ class CovidApp extends React.Component {
 						<span>Covid-19</span>
 						India Today
 					</h1>
-					<div className={classes.btnBox}>
+					<div>
 						<FontAwesomeIcon
 							icon={faSyncAlt}
 							className={classes.button}

@@ -17,7 +17,7 @@ export default {
 	panelContainer: {
 		width: "20%",
 		[sizes.down("sm")]: {
-			width: "40%",
+			width: "45%",
 		},
 	},
 };

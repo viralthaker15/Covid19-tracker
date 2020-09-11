@@ -25,6 +25,22 @@ export default {
 		},
 	},
 
+	hamburger: {
+		display: "none",
+
+		[sizes.down("md")]: {
+			display: "flex",
+			flexDirection: "column",
+			marginBottom: "1.5rem",
+			fontSize: "3rem",
+			marginLeft: "30rem",
+		},
+	},
+
+	expand: {
+		maxHeight: "25rem !important",
+	},
+
 	nav: {
 		marginTop: "7rem",
 		position: "-webkit-sticky",

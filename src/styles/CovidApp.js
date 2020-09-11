@@ -18,6 +18,16 @@ export default {
 			color: colors.purple,
 			marginRight: "1rem",
 		},
+
+		[sizes.down("md")]: {
+			fontSize: "2.8rem",
+			padding: "3rem",
+		},
+
+		[sizes.down("xs")]: {
+			fontSize: "1.745rem",
+			padding: "3rem 1.5rem",
+		},
 	},
 
 	// Updation & bells icon
@@ -236,8 +246,12 @@ export default {
 
 	//Table area
 	tableContainer: {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
 		padding: "2rem",
 		margin: "5rem 0",
+		alignItems: "center",
 
 		[sizes.down("md")]: {
 			margin: "3.5rem 0",
@@ -267,6 +281,34 @@ export default {
 		[sizes.down("sm")]: {
 			marginTop: ".2rem",
 			fontSize: "1.3rem",
+		},
+	},
+
+	"@keyframes rotation": {
+		from: {
+			transform: "rotate(0deg)",
+		},
+		to: {
+			transform: "rotate(359deg)",
+		},
+	},
+
+	loadingIcon: {
+		height: "100vh",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	},
+
+	refreshIcon: {
+		fontSize: "10rem",
+		animationName: "$rotation",
+		animationDuration: "1s",
+		animationTimingFunction: "linear",
+		animationIterationCount: "infinite",
+
+		[sizes.down("md")]: {
+			fontSize: "3rem",
 		},
 	},
 };

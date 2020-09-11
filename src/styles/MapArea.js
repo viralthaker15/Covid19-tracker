@@ -62,7 +62,7 @@ export default {
 	singlePanel: {
 		width: "50%",
 		[sizes.down("md")]: {
-			width: "25%",
+			width: "40%",
 			// order: "1",
 		},
 	},
