@@ -248,14 +248,14 @@ export default {
 	tableContainer: {
 		display: "flex",
 		flexDirection: "column",
-		justifyContent: "center",
+		justifyContent: "flex-start",
 		padding: "2rem",
 		margin: "5rem 0",
 		alignItems: "center",
 
 		[sizes.down("md")]: {
-			margin: "3.5rem 0",
-			padding: "1.5rem",
+			margin: "0rem 0",
+			padding: "0rem",
 		},
 
 		[sizes.down("sm")]: {
