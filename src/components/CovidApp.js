@@ -59,15 +59,15 @@ class CovidApp extends React.Component {
 
 	async fetchData() {
 		this.setState({ isLoading: !this.state.isLoading });
-		const countryData = axios.get("https://api.covid19india.org/data.json");
+		const countryData = axios.get("https://data.covid19india.org/data.json");
 		const districtLevel = axios.get(
-			"https://api.covid19india.org/v2/state_district_wise.json"
+			"https://data.covid19india.org/v2/state_district_wise.json"
 		);
 		const stateChanges = axios.get(
-			"https://api.covid19india.org/states_daily.json"
+			"https://data.covid19india.org/states_daily.json"
 		);
 		const updates = axios.get(
-			"https://api.covid19india.org/updatelog/log.json"
+			"https://data.covid19india.org/updatelog/log.json"
 		);
 
 		axios.all([countryData, districtLevel, stateChanges, updates]).then(
@@ -136,7 +136,7 @@ class CovidApp extends React.Component {
 			const month = date.slice(3, 5);
 			const time = date.slice(11);
 			return `${day} ${months[month]}, ${time.slice(0, 5)} IST`;
-		} catch (e) {}
+		} catch (e) { }
 	}
 
 	render() {
@@ -187,7 +187,7 @@ class CovidApp extends React.Component {
 						</div>
 					);
 				});
-		} catch (e) {}
+		} catch (e) { }
 
 		return (
 			<>

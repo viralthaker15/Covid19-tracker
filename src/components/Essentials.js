@@ -30,7 +30,7 @@ class Essentials extends React.Component {
 	async fetchResources() {
 		try {
 			const [response] = await Promise.all([
-				axios.get("https://api.covid19india.org/resources/resources.json"),
+				axios.get("https://data.covid19india.org/resources/resources.json"),
 			]);
 			const hashmap = {};
 			response.data.resources.forEach(singleData => {
@@ -44,7 +44,7 @@ class Essentials extends React.Component {
 
 				if (
 					typeof hashmap[singleData["state"]][singleData["city"]][
-						singleData["category"]
+					singleData["category"]
 					] === "undefined"
 				)
 					hashmap[singleData["state"]][singleData["city"]][
@@ -53,7 +53,7 @@ class Essentials extends React.Component {
 				if (
 					Array.isArray(
 						hashmap[singleData["state"]][singleData["city"]][
-							singleData["category"]
+						singleData["category"]
 						]
 					)
 				)
@@ -62,7 +62,7 @@ class Essentials extends React.Component {
 					].push(singleData);
 			});
 			this.setState({ data: hashmap });
-		} catch (err) {}
+		} catch (err) { }
 	}
 
 	handleQuery(query) {
