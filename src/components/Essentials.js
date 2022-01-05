@@ -28,6 +28,7 @@ class Essentials extends React.Component {
 	}
 
 	async fetchResources() {
+
 		try {
 			const [response] = await Promise.all([
 				axios.get("https://data.covid19india.org/resources/resources.json"),
